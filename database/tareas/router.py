@@ -5,7 +5,7 @@ import uuid
 def create_task(id_lista, titulo, descripcion, prioridad="Media", fecha_limite=None, usuario_encargado=""):
     session = SessionLocal()
 
-    # Contar cuántas tareas ya hay en esa listas
+    # Contar cuántas tareas ya hay en esa lista
     from sqlalchemy import func
     cantidad_actual = session.query(func.count()).select_from(Tarea).filter_by(id_lista=id_lista).scalar()
     nueva_posicion = cantidad_actual + 1
@@ -24,4 +24,17 @@ def create_task(id_lista, titulo, descripcion, prioridad="Media", fecha_limite=N
     session.add(nueva_tarea)
     session.commit()
     session.close()
+
+
+def get_all_tasks():
+    """
+    Obtiene todas las tareas almacenadas en la base de datos.
+    """
+    session = SessionLocal()
+    try:
+        tareas = session.query(Tarea).all()
+        return tareas
+    finally:
+        session.close()
+
 
