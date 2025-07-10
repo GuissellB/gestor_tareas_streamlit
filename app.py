@@ -2,11 +2,9 @@ import streamlit as st
 from database.tareas.router import create_task
 from datetime import date
 
-# Configuración de la página
 st.set_page_config(page_title="Gestor de tareas", layout="centered")
 st.title("Registrar nueva tarea")
 
-# Formulario
 with st.form("form_tarea"):
     titulo = st.text_input("Título de la tarea")
     descripcion = st.text_area("Descripción de la tarea")
@@ -18,7 +16,6 @@ with st.form("form_tarea"):
 
 # Al hacer clic en el botón
 if submitted:
-    # Validaciones
     if not titulo.strip():
         st.warning("⚠️ Por favor complete el título.")
     elif not usuario_encargado.strip():
