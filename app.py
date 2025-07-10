@@ -14,7 +14,7 @@ with st.form("form_tarea"):
     
     submitted = st.form_submit_button("Guardar tarea")
 
-# Al hacer clic en el botón
+# Clic en el botón
 if submitted:
     if not titulo.strip():
         st.warning("⚠️ Por favor complete el título.")
