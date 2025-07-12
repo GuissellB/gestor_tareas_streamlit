@@ -1,4 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 from sqlalchemy import Column, String, Text, Enum, Integer, ForeignKey, DateTime, Date
 from datetime import datetime
 from database.base import Base
@@ -15,3 +16,5 @@ class Tarea(Base):
     usuario_encargado = Column(String(100))
     posicion = Column(Integer, default=0)
     creado_en = Column(DateTime, default=datetime.utcnow)
+
+    lista = relationship("Lista", backref="tareas")

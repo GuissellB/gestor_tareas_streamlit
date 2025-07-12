@@ -1,5 +1,6 @@
 from database.tareas.model import Tarea
 from database.connection import SessionLocal 
+from sqlalchemy.orm import joinedload
 import uuid
 
 def create_task(id_lista, titulo, descripcion, prioridad="Media", fecha_limite=None, usuario_encargado=""):
@@ -39,7 +40,7 @@ def get_all_tasks(filtro_prioridad=None):
     """
     session = SessionLocal()
     try:
-        query = session.query(Tarea)
+        query = session.query(Tarea).options(joinedload(Tarea.lista))
         
         # Aplicar filtro de prioridad si se especifica
         if filtro_prioridad:
